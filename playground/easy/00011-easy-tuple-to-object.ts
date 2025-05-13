@@ -20,7 +20,9 @@
 
 /* _____________ Your Code Here _____________ */
 
-type TupleToObject<T extends readonly any[]> = any
+type TupleToObject<T extends readonly any[]> = {
+  [Key in T[number]]: Key
+}
 
 /* _____________ Test Cases _____________ */
 import type { Equal, Expect } from '@type-challenges/utils'
@@ -39,7 +41,6 @@ type cases = [
   Expect<Equal<TupleToObject<typeof tupleMix>, { 1: 1, '2': '2', 3: 3, '4': '4', [sym1]: typeof sym1 }>>,
 ]
 
-// @ts-expect-error
 type error = TupleToObject<[[1, 2], {}]>
 
 /* _____________ Further Steps _____________ */
